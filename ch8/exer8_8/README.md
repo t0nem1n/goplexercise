@@ -1,4 +1,13 @@
-running result
+
+- `walkDir` function will loop through `[]os.DirEntry` in the directory. It will recursively call `walkDir` if entry is a directory, else it will send file size to `fileSize` channel. To limit the number of concurrent goroutine at the time, we use semophore mechanism, create a buffer channel named `token`.
+
+- Create `DirWalker` struct to calculate total size of a directory. It contains fields:
+    - `dir` string: path to the directory 
+    - `fizeSize` channel: to send and receive from goroutines 
+    - `n` sync.WaitGroup: to count active goroutines and continue when no goroutine is running.
+
+
+### running result
 
 Cal total of all file in dirs
 
