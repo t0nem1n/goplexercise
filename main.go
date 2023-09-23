@@ -9,7 +9,8 @@ import (
 
 func main() {
 	start := time.Now()
-	exer8_7.Launch(10)
+	timeout := 10 * time.Second
+	exer8_7.Shout(timeout)
 	dur := time.Since(start)
 	fmt.Println(dur.String())
 }
