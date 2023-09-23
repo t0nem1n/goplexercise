@@ -78,8 +78,10 @@ func walkDir(dir string, n *sync.WaitGroup, fileSize chan<- int64) {
 			n.Add(1)
 			go walkDir(subPath, n, fileSize)
 		} else {
-			fileInfo, _ := entry.Info()
-			fileSize <- fileInfo.Size()
+			fileInfo, err := entry.Info()
+			if err == nil {
+				fileSize <- fileInfo.Size()
+			}
 		}
 	}
 }
