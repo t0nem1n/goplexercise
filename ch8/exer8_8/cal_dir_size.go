@@ -4,16 +4,24 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sync"
 )
 
 func DirSize(dirs []string) {
 	fileSize := make(chan int64)
+	var wg sync.WaitGroup
 	for _, dir := range dirs {
+		wg.Add(1)
 		go func(dir string) {
 			walkDir(dir, fileSize)
-			close(fileSize)
+			wg.Done()
 		}(dir)
 	}
+
+	go func() {
+		wg.Wait()
+		close(fileSize)
+	}()
 
 	var totalSize int64
 	var totalFile int64
