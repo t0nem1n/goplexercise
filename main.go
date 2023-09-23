@@ -2,17 +2,14 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"time"
 
-	"github.com/t0nem1n/goplexercise/ch8/exer8_6"
+	"github.com/t0nem1n/goplexercise/ch8/exer8_7"
 )
 
 func main() {
-	maxDepth := 2
-	worker := 20
 	start := time.Now()
-	exer8_6.Crawl(os.Args[1:], maxDepth, worker)
+	exer8_7.Launch(10)
 	dur := time.Since(start)
 	fmt.Println(dur.String())
 }
