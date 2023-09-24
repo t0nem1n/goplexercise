@@ -19,6 +19,8 @@ func handleConn(conn net.Conn) {
 		leavingMsg := fmt.Sprintf("%s leave chat", client.name)
 		leaving <- client
 		sending <- newMessage(client.name, leavingMsg)
+		conn.Close()
+		client.close()
 	}()
 	enterMsg := fmt.Sprintf("%s join chat", client.name)
 	entering <- client
@@ -46,6 +48,10 @@ func newMessage(who, msg string) message {
 type client struct {
 	name string
 	msg  chan string
+}
+
+func (c *client) close() {
+	close(c.msg)
 }
 
 var (
