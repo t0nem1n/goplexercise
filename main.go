@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/t0nem1n/goplexercise/ch8/exer8_10"
+	"github.com/t0nem1n/goplexercise/ch9/exer9_1"
 )
 
 func main() {
 	start := time.Now()
-	exer8_10.ChatServer()
+	exer9_1.Bank()
 	fmt.Printf("running in %v\n", time.Since(start).String())
 }
